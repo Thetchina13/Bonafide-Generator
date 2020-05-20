@@ -1,0 +1,133 @@
+<%- include("partials/header")%>
+    <style>
+        span {
+            color: chartreuse;
+        }
+    </style>
+    <div class="container">
+        <div style="margin-top: 7.5%;">
+            <div class="row">
+
+                <div class="coloumn-5" style="margin-left: 5%; text-align: left;">
+
+                    <h1 class="display-4">Student Detail</h1>
+
+                    <h3><b> Name:</b>
+                        <span class="animated fadeIn delay-1s">
+
+                        <%= name  %>
+                     </span>
+                    </h3><br>
+                    <h3><b> Student ID:</b>
+                        <span name="id" class="animated fadeIn delay-2s">  <%=  id %> </span>
+
+                    </h3><br>
+                    <h3><b> Father's Name:</b>
+                        <span class="animated fadeIn delay-3s">     Mr.                <%= father  %>   </span>
+                    </h3><br>
+                    <h3><b> Degree:</b>
+                        <span class="animated fadeIn delay-4s">                   <%= degree  %>  </span>
+                    </h3><br>
+                    <h3><b> Branch:</b>
+                        <span class="animated fadeIn delay-5s">                  <%=  branch %>  </span>
+                    </h3><br>
+                    <h3><b> Year Of Joining:</b>
+                        <span class="animated fadeIn " style="animation-delay: 6s;">                  <%= year  %>  </span>
+                    </h3><br>
+                </div>
+
+                <div class="coloumn-5">
+
+                    <div class="container" style="margin-left: 60%;">
+                        <h1 class="display-4"> Update details</h1>
+                        <div>
+                            <form action="/update" method="POST">
+                                <input id="uid" type="hidden" name="element" value="<%= uid%>">
+                                <div class="form-group">
+                                    <input class="form-control" name="name" type="text" placeholder="Enter the name" value="<%= name %>">
+                                </div>
+
+                                <div class="form-group">
+                                    <input class="form-control" name="id" type="text" placeholder="Enter the Student Id" value="<%=sid  %>">
+                                </div>
+
+                                <p> <b> Gender: </b> Male: <input name="gender" type="radio" value="Male"> Female: <input name="gender" type="radio" value="Female"> </p>
+
+
+                                <div class="form-group">
+                                    <input class="form-control" name="father" type="text" placeholder="Enter the father's name" value="<%= father %>">
+                                </div>
+                                <div class="form-group">
+                                    <p> <b> Degree: </b> B.Tech: <input name="degree" type="radio" value="B.Tech"> B.E: <input name="degree" type="radio" value="B.E"> </p>
+                                </div>
+
+
+                                <select id="branch" class="form-control" data-style="btn-info" name="branch" onchange="myfun()">
+                                    <optgroup label="Select the branch">
+                                        <option name="" value="0">Select Your Branch</option>
+                                        <option name="table1" value="Information Technology">Information Technology</option>
+                                        <option name="table2" value="Computer Science Engineering">Computer Science Engineering</option>
+                                        <option name="table3" value="Electrical And Electronic Engineering">Electrical And Electronic Engineering</option>
+                                        <option name="table4" value="Electrical And Communication Engineering">Electrical And Communication Engineering</option>
+                                        <option name="table5" vanodelue="Civil Engineering">Civil Engineering</option>
+                                        <option name="table6" value="Mechanical Engineering">Mechanical Engineering</option>
+                                      
+                
+                
+                                    </optgroup>
+                                </select>
+                                <br>
+                                <select id="year" class="form-control" data-style="btn-info" name="year" onchange="myfun()">
+                                    <optgroup label="Select the Year Of Joining">
+                                        <option name="" value="">Select Your Year Of Joining</option>
+                                        <%   var today = new Date();
+                                        for(var i=today.getFullYear()-3;i<=today.getFullYear();i++){
+                                       %>
+                
+                                        <option name="table" value="<%=i%>"><%=i%></option>
+                              
+                                        <%  }%>
+                                    </optgroup>
+                                </select>
+                                <br>
+
+
+                                <div class="form-group">
+                                    <button id="myBtn" class="btn btn-primary"> Update </button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                                    <a class="btn btn-secondary btn-lg" href="/view" role="button"> <i class="fa  fa-backward"></i></a>
+
+                                </div>
+
+
+
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+        document.getElementById("myBtn").disabled = true;
+
+        function myfun() {
+
+
+            b = document.getElementById("branch");
+            y = document.getElementById("year");
+
+
+            document.getElementById("myBtn").disabled = true;
+
+
+            if (b.options.selectedIndex.valueOf() > 0 && y.options.selectedIndex.valueOf() > 0)
+                document.getElementById("myBtn").disabled = false;
+        }
+    </script>
+
+
+    <%- include("partials/footer")%>

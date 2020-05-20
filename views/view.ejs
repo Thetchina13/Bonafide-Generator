@@ -1,0 +1,174 @@
+<%- include("partials/header")%>
+    <script src="/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+
+    <div style="width: 100%; height: 100%;">
+
+
+        <div style="  display: flex;
+align-items: center;
+justify-content: center; margin-top: 2%; margin-bottom: 2%; ">
+
+            <a class="btn btn-secondary btn-lg" href="/" role="button"> <i class="fa fa-home"></i></a>
+        </div>
+
+
+        <div class="container">
+
+            <div class="row">
+                <div class=" col-s input-group mb-3" style="width: 40%; margin-left: 5%; margin-right: 2%;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="nameInput" placeholder="Search for names.." aria-label="Username" aria-describedby="basic-addon1" onkeyup="nameFunction()">
+                </div>
+
+                <div class=" col-s input-group mb-3" style="width: 40%;margin-right: 5%;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="idInput" placeholder="Search for id.." aria-label="Username" aria-describedby="basic-addon1" onkeyup="idFunction()">
+                </div>
+            </div>
+            <table class="table" id="myTable" style="color: aliceblue;">
+                <thead>
+                    <tr onclick="myFunction()" id="r">
+                        <th scope="col"> # </th>
+
+                        <th scope="col"> Name </th>
+                        <th scope="col"> ID </th>
+                        <th scope="col"> Father's Name </th>
+                        <th scope="col"> Degree </th>
+                        <th scope="col"> Branch </th>
+                        <th scope="col"> Edit </th>
+                        <th scope="col"> Print </th>
+                        <th scope="col"> Delete </th>
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0;i<result.length;i++){%>
+                        <tr>
+                            <%if(result.length==0){%>
+                                <td>
+                                    <h1>No Record Found</h1>
+                                </td>
+                        </tr>
+                        <%  }%>
+                            <th scope="row">
+                                <%= i+1 %>
+                            </th>
+                            <td>
+                                <%= result[i].name  %>
+                            </td>
+                            <td>
+                                <%= result[i].id  %>
+                            </td>
+                            <td>
+                                <%= result[i].father  %>
+                            </td>
+                            <td>
+                                <%= result[i].degree  %>
+                            </td>
+                            <td>
+                                <%= result[i].branch  %>
+                            </td>
+
+                            <td>
+
+                                <form action="/edit" method="POST">
+                                    <button class="btn btn-info">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                 </button>
+                                    <input type="hidden" name="id" value="<%= result[i]._id%>">
+                                </form>
+
+
+                            </td>
+                            <td>
+
+                                <form action="/confirm" method="POST">
+                                    <button class="btn btn-primary">
+                                    <i class="fa fa-print" aria-hidden="true"></i>
+                                 </button>
+                                    <input type="hidden" name="idview" value="<%= result[i]._id%>">
+                                </form>
+
+
+                            </td>
+
+                            <td>
+
+                                <form action="/delete" method="POST" onsubmit="return confirm('Do you want to delete <%=result[i].name%> Record');">
+                                    <button class="btn btn-danger">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                 </button>
+                                    <input type="hidden" name="id" value="<%= result[i]._id%>">
+                                </form>
+
+
+                            </td>
+
+                            </tr>
+                            <%   }%>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <style>
+        .cl {
+            color: chartreuse;
+        }
+    </style>
+
+    <script>
+        function nameFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("nameInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function idFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("idInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        $('#myTable tr').hover(function() {
+            $(this).addClass('cl animated pulse');
+        }, function() {
+            $(this).removeClass('cl animated pulse');
+        });
+    </script>
+
+
+    <%- include("partials/footer")%>

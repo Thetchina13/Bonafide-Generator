@@ -1,0 +1,34 @@
+<%- include("partials/header")%>
+
+    <div class="container">
+        <div class="jumbotron" style="margin-top: 7.5%; background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);">
+            <h1 class="display-4">Detail's Already Exist</h1>
+
+            <h3 class="lead"><b> Name:</b>
+                <%= gender  %>
+                    <%= name  %>
+            </h3><br>
+            <h3 class="lead"><b> Student ID:</b>
+                <span name="id">  <%=  id %> </span>
+
+            </h3><br>
+            <h3 class="lead"><b> Father's Name:</b>
+                <%= father  %>
+            </h3><br>
+            <h3 class="lead"><b> Degree:</b>
+                <%= degree  %>
+            </h3><br>
+            <h3 class="lead"><b> Branch:</b>
+                <%=  branch %>
+            </h3><br>
+
+
+            <br>
+            <a class="btn btn-secondary btn-lg" href="/create" role="button"> <i class="fa fa-backward" aria-hidden="true"></i></a>
+
+        </div>
+
+    </div>
+
+
+    <%- include("partials/footer")%>

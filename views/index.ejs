@@ -1,0 +1,31 @@
+<%- include("partials/header")%>
+    <div class="animated jackInTheBox " style="height: 60%;width: 50%; border: solid red; margin-top: 5%; margin-left: 25%;">
+
+
+
+        <h1 class="animated rubberBand delay-2s" style="margin-top: 5%; font-size: 4em;"> Bonafide Generator</h1>
+        <br>
+        <form action="/confirm" method="POST">
+            <div class="ui input focus">
+                <input type="text" placeholder="Enter student id..." name="id">
+            </div>
+            <br>
+            <br>
+
+            <button class="ui inverted green  button">  Next &nbsp;<i class="fa fa-chevron-right" ></i> </button><br>
+
+        </form>
+        <br>
+        <a href="/create">
+            <button class="ui inverted  teal button "> <i class="fa fa-user-plus" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ADD STUDENT  </button></a><br><br>
+        <br>
+        <a href="/view">
+            <button class="ui inverted olive button"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VIEW STUDENT'S DETAIL &nbsp;</button></a>
+
+
+
+
+    </div>
+
+
+    <%- include("partials/footer")%>

@@ -1,0 +1,75 @@
+<%- include("partials/header")%>
+    <script src="/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <div style="  display: flex;
+    align-items: center;
+    justify-content: center; margin-top: 2%;">
+        <a class="btn btn-secondary btn-lg" href="/" role="button"> <i class="fa fa-home"></i></a>
+    </div>
+    <div class="container" style="width: 30%; margin-top: 5%;">
+        <form action="/insert" method="POST">
+
+            <div class="custom-file">
+                <input type="file" id="fileInput" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <input id="obj" type="hidden" name="element">
+            <br>
+
+            <button class="btn btn-success" style="margin-top: 5%;"> Submit</button>
+
+
+
+
+        </form>
+    </div>
+
+
+
+
+    <div class="ui yellow message" style="margin-top: 5%; width: 50%; margin-left: 25%;">
+
+        <div class="header" style="text-align: left;line-height: 1.5;">
+            <ul>
+                <span class="animated fadeIn " style="animation-delay: 1s;">      <li><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> If uploded student id matches with pre-existing record, it will be deleted</li></span>
+                <span class="animated fadeIn " style="animation-delay: 2s;">      <li> <a href="/template.xlsx" download> Click here to download the Excel File.</a></li></span>
+                <span class="animated fadeIn " style="animation-delay: 3s;">      <li> Don't Alter the format of the file.</li></span>
+                <span class="animated fadeIn " style="animation-delay: 4s;">      <li> Add the student details in the Excel.</li></span>
+                <span class="animated fadeIn " style="animation-delay: 5s;">      <li> <a href="http://beautifytools.com/excel-to-json-converter.php" target="_blank"> Click here to convert & download the Excel file to JSON</a></li></span>
+                <span class="animated fadeIn " style="animation-delay: 6s;">      <li> Upload the downloaded JSON file</li></span>
+                <span class="animated fadeIn " style="animation-delay: 7s;">      <li> And click the Submit button.</li></span>
+
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        success:
+            var text;
+        document.getElementById('fileInput').addEventListener('change', function selectedFileChanged() {
+            if (this.files.length === 0) {
+                console.log('No file selected.');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function fileReadCompleted() {
+                console.log(reader.result)
+                try {
+                    text = JSON.parse(reader.result);
+
+
+                } catch (e) {
+                    if (e instanceof SyntaxError) {
+                        printError(e, true);
+                    } else {
+                        printError(e, false);
+                    }
+                }
+                $('#obj').val(JSON.stringify(text));
+            };
+            reader.readAsText(this.files[0]);
+        });
+    </script>
+    <%- include("partials/footer")%>

@@ -1,0 +1,50 @@
+<%- include("partials/header")%>
+    <style>
+        h3 {
+            font-size: 0.8em;
+        }
+        
+        span {
+            font-size: 0.8em;
+            color: chartreuse;
+        }
+    </style>
+
+    <div class="container">
+        <br>
+        <h1 class="display-4">Confirm the student detail's</h1>
+        <div style="margin-top:3%; font-size: 3em; line-height: 2;text-align: left;">
+
+
+            <h3><b> Name:</b>
+
+                <span>       <%= name  %></span>
+            </h3>
+            <h3><b> Student ID:</b>
+                <span name="id">  <%=  id %> </span>
+
+            </h3>
+            <h3><b> Father's Name:</b>
+                <span>     Mr.  <%= father  %></span>
+            </h3>
+            <h3><b> Degree:</b>
+                <span>      <%= degree  %></span>
+            </h3>
+            <h3><b> Branch:</b>
+                <span>     <%=  branch %></span>
+            </h3>
+
+            <form action="/print" method="POST">
+                <button class="btn btn-success btn-lg">Generate Bonafide</button>
+                <input type="hidden" name="id" value="<%= id%>">
+
+            </form>
+
+            <a class="btn btn-secondary btn-lg" href="/" role="button"> <i class="fa fa-home"></i></a>
+
+        </div>
+
+    </div>
+
+
+    <%- include("partials/footer")%>
